@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <a href="teste.html">Todos os personagens</a>
+    <a href="enemies.html">Enemies</a>
+    <a href="homunculus.html">Homunculus</a>
+
+    <form method="get" action="pesquisa.html">
+        <input type="text" name="termo">
+        <input type="submit">
+    </form>
+    
+    <ul></ul>
+
+
+    <script>
+        fetch(`http://localhost:8080/Enemies`)
+        .then(retorno => retorno.json())
+        .then(retorno => {
+            let lista = document.getElementsByTagName("ul")[0];
+
+            for(let i=0; i<retorno.length; i++){
+                let itemDeLista = document.createElement("li");
+
+                let imagem = document.createElement("img");
+                imagem.src = retorno[i].imagem;
+
+                let nome = document.createElement("p");
+                nome.innerHTML = retorno[i].nome;
+
+                itemDeLista.appendChild(imagem);
+                itemDeLista.appendChild(nome);
+
+                lista.appendChild(itemDeLista);
+            }
+
+
+
+
+
+        })
+</script>
+
+<style>
+    ul{
+        list-style: none;
+        display: flex;
+    }
+
+    li{
+        border: solid 1px #e8e8e8;
+        border-radius: 5px;
+        margin: 10px;
+    }
+</style>
+
+
+</body>
+</html>
